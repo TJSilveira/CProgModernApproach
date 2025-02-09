@@ -116,14 +116,14 @@ void exerc10(){
 }
 
 void exerc11(){
-    float denominator=0;
-    float sum = 1.0f;
+    long double denominator=0;
+    long double sum = 1.0f;
 
-    for(float i=1.0;i<2000000;i++){
+    for(long double i=1.0;i<2000000;i++){
         denominator +=i;
-        sum+=(float)(1.0/denominator);
+        sum+=(long double)1.0/denominator;
     }
-    printf("%.10f\n",sum);
+    printf("%.10Lf\n",sum);
 }
 
 int main(){
