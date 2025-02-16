@@ -24,7 +24,7 @@ void reverse(){
 void poker_hand() {
     bool in_hand[NUM_SUITS][NUM_RANK] = {false};
     int num_cards,rank,suit;
-    const char rank_code[]={'2','3','4','5','6','7','8','9','10','j','q','k','a'};
+    const char rank_code[]={'2','3','4','5','6','7','8','9','t','j','q','k','a'};
     const char suit_code[]={'d','s','c','h'};
     
     printf("Enter number of cards in hand: ");
@@ -96,9 +96,135 @@ void exerc2(){
   }
 }
 
+void exerc8(){
+    float array[5][5]={0};
+    float row_totals[5]={0};
+    float average_student[5]={0};
+    float average_test[5]={0};
+    float test_max[5]={0};
+    float test_min[5]={20};
+
+    for(int i = 0; i<5;i++){
+        printf("Enter row %i: ",i+1);
+        for(int a=0;a<5;a++){
+            scanf("%f",&array[i][a]);
+        }
+    }
+
+    // Create test total for each of the students
+    for(int i=0;i<5;i++){
+        int row_temp=0;
+        for(int a=0;a<5;a++){
+            row_temp+=array[i][a];
+        }
+        row_totals[i]=row_temp;
+        average_student[i]=row_totals[i]/5.0f;
+    }
+
+    // Create average, min and max score for each test
+    for(int i=0;i<5;i++){
+        int column_temp=0;
+        for(int a=0;a<5;a++){
+            column_temp+=array[a][i];
+
+            if(array[a][i]<test_min[i]){
+                test_min[i]= array[a][i];
+            }
+
+            if(array[a][i]>test_max[i]){
+                test_max[i]= array[a][i];
+            }
+        }
+        average_test[i]=column_temp;
+    }
+
+    for(int i=0;i<5;i++){
+        printf("Student %i Total: %.1f\nStudent %i Average: %.1f\n",i+1,row_totals[i],i+1,average_student[i]);
+        puts("===================================");
+    }
+
+    for(int i=0;i<5;i++){
+        printf("Test %i: Average - %.1f; Max - %.1f; Min - %.1f\n",i,average_test[i],test_max[i],test_min[i]);
+        puts("===================================");
+    }
+
+}
+
+void exerc9(){
+    char array[10][10]={'.','.','.','.','.','.','.','.','.','.',
+                        '.','.','.','.','.','.','.','.','.','.',
+                        '.','.','.','.','.','.','.','.','.','.',
+                        '.','.','.','.','.','.','.','.','.','.',
+                        '.','.','.','.','.','.','.','.','.','.',
+                        '.','.','.','.','.','.','.','.','.','.',
+                        '.','.','.','.','.','.','.','.','.','.',
+                        '.','.','.','.','.','.','.','.','.','.',
+                        '.','.','.','.','.','.','.','.','.','.',
+                        '.','.','.','.','.','.','.','.','.','.',};
+    srand((unsigned)time(NULL));
+    char letter='A';
+    int x =0;
+    int y=0;
+    int flag_break=0;
+
+    array[x][y]=letter;
+
+    for(int i=0;i<25;i++){
+        letter++;
+        int options[5]={0,1,1,1,1};
+        int move=0; 
+
+        // Check if there are any possible moves
+        if((x-1<0 || array[x-1][y]!='.')&&(x+1>9 || array[x+1][y]!='.')&&(y-1<0 || array[x][y-1]!='.')&&(y+1>9 || array[x][y+1]!='.')){
+            flag_break=1;
+            break;
+        }
+
+        if(y-1<0 || array[x][y-1]!='.'){
+            options[1]=0;
+        }
+        if(x+1>9 || array[x+1][y]!='.'){
+            options[2]=0;
+        }
+        if(y+1>9 || array[x][y+1]!='.'){
+            options[3]=0;
+        }
+        if(x-1<0 || array[x-1][y]!='.'){
+            options[4]=0;
+        }
+
+        while(move==0){
+            move=rand()%4+1;
+            move=move*options[move];
+        }
+
+        if(move==1){
+            y--;
+        }else if(move==2){
+            x++;
+        }else if(move==3){
+            y++;
+        }else if(move==4){
+            x--;
+        }
+        array[x][y]=letter;
+
+    }
+
+    for(int i=0;i<10;i++){
+        printf("%c %c %c %c %c %c %c %c %c %c\n",array[i][0],array[i][1],array[i][2],array[i][3],array[i][4],array[i][5],array[i][6],array[i][7],array[i][8],array[i][9]);
+    }
+}
+
+void exerc15(){
+    
+}
+
 int main() {
     // Write C code here
-    reverse();
+    // reverse();
+
+    exerc9();
 
     return 0;
 }
