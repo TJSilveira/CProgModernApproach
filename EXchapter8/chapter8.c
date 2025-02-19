@@ -217,14 +217,47 @@ void exerc9(){
 }
 
 void exerc15(){
-    
+    char msg_org[500];
+    char buffer[500];
+    int shift=0;
+    int flag=0;
+    int i=0;
+
+    printf("Enter message to be encrypted: ");
+    fgets(msg_org,sizeof(char)*500,stdin);
+
+    printf("Enter shift amount (1-25): ");
+    while (!(shift>0 && shift<26))
+    {
+        scanf("%i",&shift);
+    }
+
+    while(flag==0){
+        if(msg_org[i]=='\0'){
+            buffer[i]='\0';
+            flag=1;
+            break;
+        }else if((msg_org[i]>='A')&&(msg_org[i]<='Z')){
+            buffer[i]=((msg_org[i]-'A')+shift)%26 + 'A';
+        }else if((msg_org[i]>='a')&&(msg_org[i]<='z')){
+            buffer[i]=((msg_org[i]-'a')+shift)%26 + 'a';
+        }else{
+            buffer[i]=msg_org[i];
+        }
+
+        printf("This is a print: %c\n",msg_org[i]);
+        i++;
+    }
+
+    printf("%s",buffer);
 }
 
 int main() {
     // Write C code here
     // reverse();
-
     exerc9();
+
+    exerc15();
 
     return 0;
 }
