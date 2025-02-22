@@ -252,6 +252,51 @@ void exerc15(){
     printf("%s",buffer);
 }
 
+void exerc16(){
+    char word1[500];
+    int char_w1[26] ={0};
+    char word2[500];
+    int char_w2[26]={0};
+    int flag =0;
+    
+    printf("Enter first word: ");
+    fgets(word1,sizeof(char)*500,stdin);
+    
+    printf("Enter second word: ");
+    fgets(word2,sizeof(char)*500,stdin);
+    
+    int i=0;
+    while(1){
+        if(word1[i]=='\0'){
+            break;
+        }
+        char_w1[(word1[i]-'a')]++;
+        i++;
+    }
+    
+    i=0;
+    while(1){
+        if(word2[i]=='\0'){
+            break;
+        }
+        char_w2[(word2[i]-'a')]++;
+        i++;
+    }
+    
+    for(int counter =0; counter<26;counter++){
+        if(char_w1[counter]!=char_w2[counter]){
+            flag=1;
+        }
+    }
+    
+    if(flag==0){
+        printf("the words are anagrams");
+    }else{
+        printf("the words are not anagrams");
+    }
+    
+}
+
 int main() {
     // Write C code here
     // reverse();
