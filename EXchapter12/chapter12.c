@@ -5,7 +5,6 @@ void proj1(){
     printf("Enter a message: ");
     char array[500]={0};
     char *pointer=array;
-    //char *start_array=array;
     char character;
 
     while (character!='\n')
