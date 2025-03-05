@@ -36,9 +36,7 @@ void reminder(){
         if(day==0){
             break;
         }else if(day>31||day<1){
-            printf("========================\n");
-            printf("%i is not a valid day\n",day);
-            printf("========================\n");
+            read_line(temp_reminder,MSG_LEN);
             continue;
         }
         sprintf(day_str,"%2d",day);
@@ -128,7 +126,7 @@ void proj1(){
 
 
 int main(int argc, char *argv[]){
-    // reminder();
+    reminder();
     
     // char array[] = "";
     // printf("Resultado funcao strlen_ts: %li\n",strlen_ts(array));
@@ -144,6 +142,6 @@ int main(int argc, char *argv[]){
     //     printf("%s\n",argv[i]);
     // }
 
-    proj1();
+    // proj1();
 
 }
