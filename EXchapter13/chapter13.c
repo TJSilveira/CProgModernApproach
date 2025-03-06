@@ -24,34 +24,47 @@ int read_line(char str[], int n){
 
 void reminder(){
     char array[MAX_REMIND][MSG_LEN]={0};
-    char day_str[3]={0};
-    char temp_reminder[MSG_LEN]={0};
+    char day_str[3]={0},month_str[3]={0},hour_str[3]={0},minutes_str[3]={0};
+    char temp_reminder[30]={0};
+    char temp_full_reminder[MSG_LEN]={0};
     int day;
+    int month;
+    int hour;
+    int minutes;
     int counter=0;
 
     while(1){
         int i,j;
         printf("Enter day and reminder: ");
-        scanf("%2d",&day);
-        if(day==0){
+        scanf("%2d/%2d %2d:%2d",&month,&day,&hour,&minutes);
+        if(month==0){
             break;
         }else if(day>31||day<1){
             read_line(temp_reminder,MSG_LEN);
             continue;
+        }else if(month>12 || month<1){
+            read_line(temp_reminder,MSG_LEN);
+            continue;
+        }else if(hour>24 || hour<0){
+            read_line(temp_reminder,MSG_LEN);
+            continue;
+        }else if(minutes>59 || minutes<0){
+            read_line(temp_reminder,MSG_LEN);
+            continue;
         }
-        sprintf(day_str,"%2d",day);
-        read_line(temp_reminder,MSG_LEN);
-        strcat(day_str,temp_reminder);
 
+        read_line(temp_reminder,MSG_LEN);
+        sprintf(temp_full_reminder,"%2d/%2d %2d:%2d %s",month,day,hour,minutes,temp_reminder);
+    
         for(i=0;i<counter;i++){
-            if(strcmp(day_str,array[i])<0){
+            if(strcmp(temp_full_reminder,array[i])<0){
                 break;
             }
         }
         for(j=counter;j>i;j--){
             strcpy(array[j],array[j-1]);
         }
-        strcpy(array[i],day_str);
+        strcpy(array[i],temp_full_reminder);
 
         counter++;     
     }
