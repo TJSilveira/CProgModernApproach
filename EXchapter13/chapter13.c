@@ -111,6 +111,51 @@ char *strcat_ts(char *s1,const char *s2){
     return s1;
 }
 
+void exerc6(char *string,const char *censor){
+    int i=0;
+    char *p = string;
+
+    while(*(string+2)){
+        if(*(string)=='f' && *(string+1)=='o' && *(string+2)=='o'){
+            *(string)='x';
+            *(string+1)='x';
+            *(string+2)='x';
+        }
+        string++;
+    }
+
+    printf("\nString censored: %s\n",p);
+}
+
+void exerc13(const char *domain, char *index_url){
+    char prefix[200] = "https://www.";
+    char temp_domain[500];
+    strcpy(temp_domain,domain);
+    char suffix[]="/index.html";
+
+    strcat(prefix,strcat(temp_domain,suffix));
+    strcpy(index_url,prefix);
+}
+
+void exerc18(char *url){
+    // go to the end of the string
+    while(*url){
+        url++;
+    }
+
+    // go the the last element of the string
+    url--;
+
+    // iterate backwards until you find the last forward slash
+    while(*url){
+        if(*url=='/'){
+            *url='\0';
+            break;
+        }
+        url--;
+    }
+}
+
 void proj1(){
     char small_word[60]="ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ";
     char largest_word[60]={0};
@@ -137,9 +182,62 @@ void proj1(){
     printf("the smallest word is: %s",small_word);
 }
 
+void proj4(int argc, char *argv[]){
+    int i = argc-1;
+
+    for(;i>0;i--){
+        printf("%s ",argv[i]);
+    }
+}
+
+void proj5(int argc, char *argv[]){
+    int i = argc-1;
+    int sum=0;
+
+    for(;i>0;i--){
+        sum += atoi(argv[i]);
+    }
+
+    printf("Total: %i",sum);
+}
+
+void proj7(int number){
+    char *first_number[]={"","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"};
+    char *second_number[]={"zero","one","two","three","four","five","six","seven","eigh","nine"};
+    char *teens[]={"ten","eleven","twelve","thirteen","14","15","16","17","18","19"};
+
+    int first_digit = number/10;
+    int second_digit = number%10;
+
+    char final_number[40];
+
+    if(first_digit==0){
+        strcpy(final_number,second_number[second_digit]);
+    }else if(first_digit==1){
+        strcpy(final_number,teens[second_digit]);
+    }else if(first_digit>1 && first_digit<10 && second_digit==0){   
+        strcpy(final_number,first_number[first_digit]);
+    }else if(first_digit>1 && first_digit<10 && second_digit!=0){
+        sprintf(final_number,"%s-%s",first_number[first_digit],second_number[second_digit]);
+    }
+
+    printf("The number is: %s",final_number);
+}
+
+void proj18(){
+    int day=0;
+    int month=0;
+    int year=0;
+    char *month_ext[]={"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Out","Nov","Dec"};
+
+    printf("Enter the date (dd/mm/yyyy): ");
+    scanf("%i/%i/%i",&day,&month,&year);
+
+    printf("The Date is %s %i, %i",month_ext[month-1],day,year);
+}
 
 int main(int argc, char *argv[]){
-    reminder();
+    // reminder();
     
     // char array[] = "";
     // printf("Resultado funcao strlen_ts: %li\n",strlen_ts(array));
@@ -157,4 +255,25 @@ int main(int argc, char *argv[]){
 
     // proj1();
 
+    // proj4(argc,argv);
+
+    // char array[]="food fool";
+    // exerc6(array,"foo");
+
+    // char domain[]="knking.com";
+    // char index_url[300];
+    // exerc13(domain,index_url);
+
+    // printf("\nThis is the website address: %s\n",index_url);
+    // exerc18(index_url);
+    // printf("\nNew address: %s\n",index_url);
+
+    // proj5(argc,argv);
+
+    // proj7(23);
+    // proj7(5);
+    // proj7(12);
+    // proj7(19);
+    // proj7(85);
+    proj18();
 }
